@@ -3,11 +3,11 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
   output: 'export',
-  basePath: '/NOMBRE-DEL-REPOSITORIO',
+  basePath: '/',
   images: {
     unoptimized: true,
   },
-  assetPrefix: isProd ? '/NOMBRE-DEL-REPOSITORIO/' : '',
+  assetPrefix: isProd ? '/' : '',
 };
 
 export default nextConfig;
