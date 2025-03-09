@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import React from 'react';
+import './App.css';
+import avatar from './assets/avatar.jpeg';
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div className="portfolio-container">
+      <nav className="navbar">
+        <div className="nav-links">
+          <a href="#">About</a>
+          <a href="#">Work</a>
+          <a href="#">Blog</a>
+          <a href="#">Gallery</a>
+        </div>
+      </nav>
+
+      <div className="profile-section">
+        <div className="profile-image">
+          <img
+            src={avatar}
+            alt="Profile"
+          />
+        </div>
+        <h1 className="profile-name">Aarón Garcia</h1>
+        <p className="profile-title">Software Engineer</p>
+
+
+        <p className="profile-description">
+        Lorem ipsum dolor sit amet consectetur adipiscing elit eget, varius bibendum risus pharetra sollicitudin suscipit himenaeos, fermentum mi dictumst feugiat rutrum felis cubilia. Nostra convallis mattis nascetur cum pretium montes ridiculus duis tellus, mauris congue gravida curae nullam sociis quisque augue taciti, sociosqu magna fames netus non blandit feugiat aliquam. Suspendisse metus in dapibus ut nam augue potenti fames fusce, aenean bibendum sodales magna commodo egestas tempor eget suscipit taciti, curae iaculis mattis pretium pellentesque luctus pharetra tempus.
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
-
 export default App
