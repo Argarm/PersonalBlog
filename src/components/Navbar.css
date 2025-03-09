@@ -1,0 +1,36 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(13, 17, 23, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-sizing: border-box; 
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%; /* Ensure the nav-links container takes full width */
+    max-width: 1200px; /* Optional: Limit the maximum width */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
