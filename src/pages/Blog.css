@@ -18,7 +18,7 @@
 /* Grid para las tarjetas del blog */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px; /* Equivalente a gap-6 */
 }
 

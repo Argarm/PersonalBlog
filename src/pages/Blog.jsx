@@ -1,6 +1,6 @@
 import BlogCard from '../components/BlogCard';
 import posts from '../data/Post';
-
+import './Blog.css';
 export default function Blog() {
   return (
     <div className='container'>
