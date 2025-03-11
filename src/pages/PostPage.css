@@ -1,4 +1,8 @@
 img{
     max-width: 1024px;
-    max-height: 1024px;
+    max-height: 512px;
+}
+
+p {
+    white-space: pre-line;
 }
