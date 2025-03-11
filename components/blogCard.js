@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import './BlogCard.css';
+import Link from 'next/link';
+import '../styles/components/BlogCard.module.css';
 
 export default function BlogCard({ post }) {
   return (
@@ -10,7 +10,7 @@ export default function BlogCard({ post }) {
         <span className="blog-card-category">{post.category}</span>
         <p className="blog-card-date">{post.date}</p>
         <h2 className="blog-card-title">
-          <Link to={`/blog/${post.slug}`} className="blog-card-link">
+          <Link href={`/blog/${post.slug}`} className="blog-card-link">
             {post.title}
           </Link>
         </h2>
