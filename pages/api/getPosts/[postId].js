@@ -6,15 +6,14 @@ export default async function handler(req, res) {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
+    const { postId } = req.query;
 
-    const { pageId } = req.query;
-
-    if (!pageId) {
+    if (!postId) {
         return res.status(400).json({ error: 'Page ID is required' });
     }
 
     try {
-        const blocks = await notion.blocks.children.list({ block_id: pageId });
+        const blocks = await notion.blocks.children.list({ block_id: postId });
         const paragraphsWithText = blocks.results.filter(block => block.type === 'paragraph' && block.paragraph.rich_text.length > 0);
         
         let plainTexts = [];

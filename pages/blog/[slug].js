@@ -1,37 +1,43 @@
 import { useRouter } from 'next/router';
-import posts from '../data/Post';
+import { useEffect, useState } from 'react';
 
-export default function BlogPost({ post }) {
+export default function PostPage() {
   const router = useRouter();
+  const { slug } = router.query;
+  const [post, setPost] = useState(null);
+  useEffect(() => {
+  
+    if (!slug) return;
+    fetch('/api/getPosts')
+      .then((res) => res.json())
+      .then((data) => {
+        
+        const foundPost = data.pages.find((p) => p.slug === slug);
+        if (foundPost) {
+          fetch(`/api/getPosts/${foundPost.id}`)
+            .then((res) => res.json())
+            .then((postData) => {
+              setPost({
+                ...foundPost,
+                content: postData.join(' '),
+              });
+            });
+        }
+      });
+  }, [slug]);
 
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
+  if (!post) {
+    return <p>Cargando...</p>;
   }
 
   return (
-    <div className='container'>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+    <div className="container">
+      <h1 className="post-title">{post.title}</h1>
+      <p className="post-date">{post.date}</p>
+      <img src={post.image} alt={post.title} className="post-image" />
+      <div className="post-content">
+        <p>{post.content}</p>
+      </div>
     </div>
   );
-}
-
-export async function getStaticPaths() {
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
-
-  return { paths, fallback: true };
-}
-
-export async function getStaticProps({ params }) {
-  const post = posts.find((p) => p.slug === params.slug);
-  
-  if (!post) {
-    return { notFound: true };
-  }
-
-  return {
-    props: { post },
-  };
 }
