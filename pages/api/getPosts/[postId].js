@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client';
 
+// eslint-disable-next-line no-undef
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 export default async function handler(req, res) {
