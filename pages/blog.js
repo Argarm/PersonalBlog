@@ -21,7 +21,7 @@ export default function Blog() {
         {posts.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`} passHref>
             <div className={styles.blogCard}>
-            <img src={post.image} alt={post.title} className={styles.blogCardImage} />
+            <img src={post.img} alt={post.title} className={styles.blogCardImage} />
             <div className={styles.blogCardContent}>
               <span className={styles.blogCardCategory}>{post.category}</span>
               <p className={styles.blogCardDate}>{post.date}</p>

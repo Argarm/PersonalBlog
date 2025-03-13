@@ -17,17 +17,32 @@ export default async function handler(req, res) {
             page_size: 100,
         });
 
-        const results = response.results
-            .filter(block => block.type === 'child_page')
-            .map(post => 
-                ({
-                    id : post.id.replace(/-/g, ""),
-                    title : post.child_page.title,
-                    slug : formatText(post.child_page.title),
-                }));
+        const results = await Promise.all(
+            response.results
+                .filter(block => block.type === 'child_page')
+                .map(async post => ({
+                    id: post.id.replace(/-/g, ""),
+                    title: post.child_page.title,
+                    slug: formatText(post.child_page.title),
+                    img: await getPageMetadata(post.id.replace(/-/g, ""))
+                }))
+        );
+
+        console.log(results); // Now this will log the fully resolved array
+
         res.status(200).json({ pages: results });
     } catch (error) {
         console.error("Error fetching pages:", error);
         res.status(500).json({ success: false, error: error.message });
     }
+}
+
+
+export async function getPageMetadata(pageId) {
+    const page = await notion.pages.retrieve({ page_id: pageId });
+    const coverUrl = page.cover 
+        ? (page.cover.type === 'external' ? page.cover.external.url : page.cover.file.url) 
+        : 'postWithNoCoverFound.webp';
+
+    return coverUrl;
 }
