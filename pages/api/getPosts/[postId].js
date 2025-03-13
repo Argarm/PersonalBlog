@@ -13,6 +13,8 @@ export default async function handler(req, res) {
     }
 
     try {
+        var postUrl = await getPageMetadata(postId);
+        console.log('Post URL:', postUrl);
         const blocks = await notion.blocks.children.list({ block_id: postId });
         const paragraphsWithText = blocks.results.filter(block => block.type === 'paragraph' && block.paragraph.rich_text.length > 0);
         
@@ -25,9 +27,21 @@ export default async function handler(req, res) {
             });
         });
 
-        res.status(200).json(plainTexts);
+        res.status(200).json({ postImgUrl: postUrl, postText: plainTexts });
     } catch (error) {
         console.error('Error fetching Notion page:', error);
         res.status(500).json({ error: 'Error fetching Notion page' });
+    }
+
+    async function getPageMetadata(pageId) {
+        const page = await notion.pages.retrieve({ page_id: pageId });
+        
+        // Extract Cover Image URL
+        const coverUrl = page.cover 
+            ? (page.cover.type === 'external' ? page.cover.external.url : page.cover.file.url) 
+            : 'No Cover Found';
+    
+        console.log('Cover Image URL:', coverUrl);
+        return coverUrl;
     }
 }
