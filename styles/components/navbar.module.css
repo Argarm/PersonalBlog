@@ -12,7 +12,7 @@
     box-sizing: border-box; 
 }
 
-.nav-links {
+.navLinks {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -20,7 +20,7 @@
     max-width: 1200px; /* Optional: Limit the maximum width */
 }
 
-.nav-links a {
+.navLinks a {
     color: white;
     text-decoration: none;
     padding: 8px 15px;
@@ -30,7 +30,7 @@
     font-size: 14px;
 }
 
-.nav-links a:hover {
+.navLinks a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transform: scale(1.1);
 }

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import styles from '../../styles/components/postPage.module.css';
 
 export default function PostPage() {
   const router = useRouter();
@@ -32,10 +33,10 @@ export default function PostPage() {
 
   return (
     <div className="container">
-      <h1 className="post-title">{post.title}</h1>
-      <p className="post-date">{post.date}</p>
-      <img src={post.image} alt={post.title} className="post-image" />
-      <div className="post-content">
+      <h1 className={styles.title}>{post.title}</h1>
+      <p className={styles.postDate}>{post.date}</p>
+      <img src={post.image} alt={post.title} className={styles.postImage} />
+      <div className={styles.postContent}>
         <p>{post.content}</p>
       </div>
     </div>

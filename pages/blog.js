@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import styles from '../styles/components/blog.module.css';
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
@@ -14,18 +15,17 @@ export default function Blog() {
 
 
   return (
-    <div className='container'>
-      <h1 className='main-title'>Blog Posts</h1>
-      <div className='grid-container'>
+    <div className={styles.container}>
+      <h1 className={styles.mainTitle}>Blog Posts</h1>
+      <div className={styles.gridContainer}>
         {posts.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`} passHref>
-            <div className="blog-card">
-            <img src={post.image} alt={post.title} className="blog-card-image" />
-            <div className="blog-card-content">
-              <span className="blog-card-category">{post.category}</span>
-              <p className="blog-card-date">{post.date}</p>
-              <h2 className="blog-card-title">{post.title}</h2>
-              {/* <p className="blog-card-excerpt">{post.excerpt}</p> */}
+            <div className={styles.blogCard}>
+            <img src={post.image} alt={post.title} className={styles.blogCardImage} />
+            <div className={styles.blogCardContent}>
+              <span className={styles.blogCardCategory}>{post.category}</span>
+              <p className={styles.blogCardDate}>{post.date}</p>
+              <h2 className={styles.blogCardTitle}>{post.title}</h2>
             </div>
           </div>
           </Link>

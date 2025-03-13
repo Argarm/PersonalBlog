@@ -1,8 +1,8 @@
-.post-img{
+.postImg{
     max-width: 1024px;
     max-height: 512px;
 }
 
-.post-content{
+.postContent{
     white-space: pre-line;
 }

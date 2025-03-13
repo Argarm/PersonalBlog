@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import '../styles/components/Navbar.module.css';
+import styles from '../styles/components/navbar.module.css';
 
 function Navbar() {
   return (
-    <nav className="navbar">
-    <div className="nav-links">
+    <nav className={styles.navbar}>
+    <div className={styles.navLinks}>
       <Link href="/">🏠</Link>
       <a href="#">Work</a>
       <Link href="/blog">Blog</Link>
