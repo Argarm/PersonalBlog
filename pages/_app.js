@@ -1,6 +1,6 @@
 import '../styles/global.css'
 
-function Aplicacion({  pageProps }) {
+function Aplicacion({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 

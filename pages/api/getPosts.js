@@ -1,41 +1,41 @@
-import { Client } from '@notionhq/client';
+import { notionService } from '../../services/notion';
+import { formatSlug, sanitizeId } from '../../utils/formatters';
+import { validateApiMethod } from '../../utils/apiValidators';
 
-// eslint-disable-next-line no-undef
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-
-function formatText(text) {
-    return text.toLowerCase().replace(/\s+/g, '-');
-}
+const NOTION_BLOCK_ID = process.env.NOTION_BLOCK_ID;
+const CACHE_DURATION = process.env.CACHE_DURATION || 3600000; 
 
 export default async function handler(req, res) {
-    if (req.method !== 'GET') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
+  if (!validateApiMethod(req, res, 'GET')) return;
 
-    try {
-        const response = await notion.blocks.children.list({
-            block_id: '1b3555bc040580d7b82bd3c9f8181401',
-            page_size: 100,
-        });
+  try {
+    const response = await notionService.getPages(NOTION_BLOCK_ID);
 
-        const results = await Promise.all(
-            response.results
-                .filter(block => block.type === 'child_page')
-                .map(async post => ({
-                    id: post.id.replace(/-/g, ""),
-                    title: post.child_page.title,
-                    slug: formatText(post.child_page.title),
-                    img: await getPageMetadata(post.id.replace(/-/g, ""))
-                }))
-        );
+    const results = await Promise.all(
+      response.results
+        .filter(block => block.type === 'child_page')
+        .map(async post => {
+          const id = sanitizeId(post.id);
+          const title = post.child_page.title;
+          
+          return {
+            id,
+            title,
+            slug: formatSlug(title),
+            img: await notionService.getPageMetadata(id)
+          };
+        })
+    );
 
-        console.log(results); // Now this will log the fully resolved array
-
-        res.status(200).json({ pages: results });
-    } catch (error) {
-        console.error("Error fetching pages:", error);
-        res.status(500).json({ success: false, error: error.message });
-    }
+    res.setHeader('Cache-Control', `public, max-age=${CACHE_DURATION / 1000}`);
+    res.status(200).json({ pages: results, updated: new Date().toISOString() });
+  } catch (error) {
+    console.error("Error fetching pages:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: process.env.NODE_ENV === 'production' ? 'Server error' : error.message 
+    });
+  }
 }
 
 
