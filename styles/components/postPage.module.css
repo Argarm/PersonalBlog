@@ -1,9 +1,45 @@
-.postImg{
-    max-width: 1024px;
-    max-height: 512px;
-}
-
-.postContent{
+.gridContainer {
+    max-width: 800px;
+    margin: 100px auto 40px;
+    padding: 0 20px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .postDate {
+    color: #9baec8;
+    margin-bottom: 20px;
+  }
+  
+  .imageContainer {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .postContent {
     white-space: pre-line;
-}
-
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #e6edf3;
+  }
+  
+  .postMeta {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9baec8;
+    font-size: 0.9rem;
+  }
+  
+  .errorMessage {
+    text-align: center;
+    padding: 40px;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+  }

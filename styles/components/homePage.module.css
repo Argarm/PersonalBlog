@@ -1,82 +1,88 @@
 .profileWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 40px;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.profileImageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImage img {
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  border: 4px solid white;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.profileLocation {
+  margin-top: 10px;
+  color: #ffd700;
+}
+
+.languageButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.languageButtons button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profileName {
+  font-size: 40px;
+  margin: 10px 0 10px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.profileTitle {
+  font-size: 20px;
+  color: #9baec8;
+  margin-bottom: 10px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.profileDescription {
+  max-width: 600px;
+  color: #8b949e;
+  line-height: 1.6;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
   
-  .profileImageSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .profileImage img {
-    border-radius: 50%;
-    width: 180px;
-    height: 180px;
-    border: 4px solid white;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  .profileLocation {
-    margin-top: 10px;
-    color: #ffd700;
-  }
-  
-  .languageButtons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .languageButtons button {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid white;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .profileName {
-    font-size: 40px;
-    margin: 10px 0 10px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-  }
-  
-  .profileTitle {
-    font-size: 20px;
-    color: #9baec8;
-    margin-bottom: 10px;
-    font-weight: 300;
-    text-align: center;
-  }
-  
-  .socialButtons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .socialButton {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid white;
-    color: white;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 16px;
-  }
-  
-  .profileDescription {
-    max-width: 600px;
-    color: #8b949e;
-    line-height: 1.6;
-    font-size: 18px;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
+.activeLanguage {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+
+.socialButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.socialButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
