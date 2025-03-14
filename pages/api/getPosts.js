@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { notionService } from '../../services/notion';
 import { formatSlug, sanitizeId } from '../../utils/formatters';
 import { validateApiMethod } from '../../utils/apiValidators';

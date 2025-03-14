@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { notionService } from '../../../services/notion';
 import { validateApiMethod } from '../../../utils/apiValidators';
 
