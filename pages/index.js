@@ -40,14 +40,14 @@ export default function Home() {
         <p className={styles.profileTitle}>{t.jobTitle}</p>
 
         <div className={styles.socialButtons}>
-          <a href="https://github.com/aarongarcia" target="_blank" rel="noopener noreferrer" className={styles.socialButton}>🐙 GitHub</a>
-          <a href="https://linkedin.com/in/aarongarcia" target="_blank" rel="noopener noreferrer" className={styles.socialButton}>💼 LinkedIn</a>
-          <a href="mailto:contact@aarongarcia.dev" className={styles.socialButton}>✉️ Email</a>
+          <a href="https://github.com/argarm" target="_blank" rel="noopener noreferrer" className={styles.socialButton}>🐙 GitHub</a>
+          <a href="https://www.linkedin.com/in/aaron-garcia-a853b2163/" target="_blank" rel="noopener noreferrer" className={styles.socialButton}>💼 LinkedIn</a>
+          <a href="mailto:aarongrmrr@gmail.com" className={styles.socialButton}>✉️ Email</a>
         </div>
       </div>
     </div>
     <p className={styles.profileDescription}>
-      Desarrollador apasionado por crear experiencias web excepcionales. Especializado en React, Next.js y arquitecturas modernas. Con experiencia en proyectos de e-commerce, aplicaciones SaaS y soluciones empresariales. Actualmente trabajando en mejorar la accesibilidad y rendimiento de aplicaciones web.
+      {t.profileDescription}
     </p>
   </>
   );
