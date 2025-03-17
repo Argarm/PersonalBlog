@@ -60,13 +60,9 @@ export default function PostPage() {
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.postDate}>{post.date}</p>
         <div className={styles.imageContainer}>
-          <img 
+          <EnhancedImage 
             src={post.image}
             alt={post.title}
-            width={1024}
-            height={512}
-            layout="responsive"
-            objectFit="cover"
             priority
           />
         </div>

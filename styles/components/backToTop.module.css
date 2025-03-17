@@ -1,0 +1,41 @@
+.backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(58, 134, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 90;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+  
+  .backToTop.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .backToTop:hover {
+    background-color: rgba(58, 134, 255, 1);
+    transform: translateY(-5px);
+  }
+  
+  @media (max-width: 768px) {
+    .backToTop {
+      width: 40px;
+      height: 40px;
+      bottom: 16px;
+      right: 70px;
+    }
+  }
