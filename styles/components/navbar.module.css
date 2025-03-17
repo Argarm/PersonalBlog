@@ -3,21 +3,25 @@
     justify-content: center;
     align-items: center;
     padding: 15px 30px;
-    background-color: rgba(13, 17, 23, 0.9);
+    background-color: rgba(13, 17, 23, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 10;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
 }
 
 .navLinks {
     display: flex;
     gap: 20px;
     justify-content: center;
-    width: 100%; /* Ensure the nav-links container takes full width */
-    max-width: 1200px; /* Optional: Limit the maximum width */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .navLinks a {
@@ -28,9 +32,40 @@
     font-weight: 500;
     transition: background 0.3s, transform 0.2s;
     font-size: 14px;
+    position: relative;
 }
 
 .navLinks a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
+}
+
+.navLinks a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ffd700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navLinks a:hover::after {
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .navLinks {
+        gap: 10px;
+    }
+    
+    .navLinks a {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
 }
