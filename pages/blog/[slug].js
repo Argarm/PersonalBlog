@@ -1,9 +1,8 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Loading from '../../components/Loading';
 import styles from '../../styles/components/postPage.module.css';
+import EnhancedImage from '../../components/EnhancedImage';
 
 export default function PostPage() {
   const router = useRouter();
@@ -49,7 +48,6 @@ export default function PostPage() {
         setLoading(false);
       });
   }, [slug]);
-  console.log(post);
   if (loading) return <Loading />;
   if (error) return <div className={styles.errorMessage}>{error}</div>;
   if (!post) return <div className={styles.errorMessage}>Post no encontrado</div>;

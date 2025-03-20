@@ -7,7 +7,6 @@ export class NotionService {
   }
 
   async getPages(blockId) {
-    console.log(blockId);
     const cacheKey = `pages_${blockId}`;
     
     if (this.cache[cacheKey]) {
