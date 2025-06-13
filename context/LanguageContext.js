@@ -8,7 +8,20 @@ export function LanguageProvider({ children }) {
   const [t, setT] = useState(translations.es);
 
   useEffect(() => {
+    // Leer idioma guardado en localStorage al montar
+    const storedLang = typeof window !== 'undefined' ? localStorage.getItem('language') : null;
+    if (storedLang && translations[storedLang]) {
+      setLanguage(storedLang);
+      setT(translations[storedLang]);
+    }
+  }, []);
+
+  useEffect(() => {
     setT(translations[language]);
+    // Guardar idioma en localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', language);
+    }
   }, [language]);
 
   return (

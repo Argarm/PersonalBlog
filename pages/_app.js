@@ -1,15 +1,17 @@
 import '../styles/global.css';
 import Layout from '../components/Layout';
 import { LanguageProvider } from '../context/LanguageContext';
+import { ThemeProvider } from 'next-themes';
 
-// eslint-disable-next-line no-unused-vars
 function Aplicacion({ Component, pageProps }) {
   return (
-    <LanguageProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </LanguageProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <LanguageProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

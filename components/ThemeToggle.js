@@ -1,46 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import styles from '../styles/components/themeToggle.module.css';
+import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(true);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') !== 'false';
-    setDarkMode(isDark);
-    updateTheme(isDark);
+    setMounted(true);
   }, []);
 
-  const toggleTheme = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem('darkMode', newMode);
-    updateTheme(newMode);
-  };
+  if (!mounted) return null; // Evita el flicker en SSR
 
-  const updateTheme = (isDark) => {
-    const root = document.documentElement;
-    if (isDark) {
-      root.style.setProperty('--primary-bg', '#0a0f16');
-      root.style.setProperty('--secondary-bg', '#141c26');
-      root.style.setProperty('--primary-text', '#ffffff');
-      root.style.setProperty('--secondary-text', '#b3c0d1');
-      root.style.setProperty('--card-bg', 'rgba(20, 28, 38, 0.7)');
-    } else {
-      root.style.setProperty('--primary-bg', '#f0f4f8');
-      root.style.setProperty('--secondary-bg', '#ffffff');
-      root.style.setProperty('--primary-text', '#1a202c');
-      root.style.setProperty('--secondary-text', '#4a5568');
-      root.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.9)');
-    }
+  const isDark = resolvedTheme === 'dark';
+
+  const toggleTheme = () => {
+    setTheme(isDark ? 'light' : 'dark');
   };
 
   return (
-    <button 
-      className={styles.themeToggle} 
+    <button
+      className={styles.themeToggle}
       onClick={toggleTheme}
-      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {darkMode ? (
+      {isDark ? (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>

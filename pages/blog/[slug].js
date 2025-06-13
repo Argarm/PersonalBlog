@@ -1,54 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import Loading from '../../components/Loading';
 import styles from '../../styles/components/postPage.module.css';
 import EnhancedImage from '../../components/EnhancedImage';
+import { notionService } from '../../services/notion';
 
-export default function PostPage() {
-  const router = useRouter();
-  const { slug } = router.query;
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (!slug) return;
-    setLoading(true);
-
-    fetch('/api/getPosts')
-      .then((res) => {
-        if (!res.ok) throw new Error('Error cargando lista de posts');
-        return res.json();
-      })
-      .then((data) => {
-        const foundPost = data.pages.find((p) => p.slug === slug);
-        if (!foundPost) {
-          setError('Post no encontrado');
-          setLoading(false);
-          return;
-        }
-        return fetch(`/api/getPosts/${foundPost.id}`)
-          .then((res) => {
-            if (!res.ok) throw new Error('Error cargando datos del post');
-            return res.json();
-          })
-          .then((postData) => {
-            setPost({
-              ...foundPost,
-              image: postData.postImgUrl,
-              content: postData.postText.join(' '),
-              wordCount: postData.wordCount
-            });
-            setLoading(false);
-          });
-      })
-      .catch(err => {
-        console.error(err);
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [slug]);
-  if (loading) return <Loading />;
+export default function PostPage({ post, error }) {
   if (error) return <div className={styles.errorMessage}>{error}</div>;
   if (!post) return <div className={styles.errorMessage}>Post no encontrado</div>;
 
@@ -73,4 +27,67 @@ export default function PostPage() {
       </div>
     </>
   );
+}
+
+export async function getStaticPaths() {
+  const NOTION_BLOCK_ID = process.env.NOTION_BLOCK_ID;
+  const response = await notionService.getPages(NOTION_BLOCK_ID);
+  const paths = response.results
+    .filter(block => block.type === 'child_page')
+    .map(post => {
+      const title = post.child_page.title;
+      return {
+        params: { slug: title.toLowerCase().replace(/\s+/g, '-') }
+      };
+    });
+  return {
+    paths,
+    fallback: false
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const NOTION_BLOCK_ID = process.env.NOTION_BLOCK_ID;
+  const response = await notionService.getPages(NOTION_BLOCK_ID);
+  const foundPost = response.results
+    .filter(block => block.type === 'child_page')
+    .map(post => {
+      const id = post.id.replace(/-/g, '');
+      const title = post.child_page.title;
+      return {
+        id,
+        title,
+        slug: title.toLowerCase().replace(/\s+/g, '-'),
+        created_time: post.created_time
+      };
+    })
+    .find(p => p.slug === params.slug);
+
+  if (!foundPost) {
+    return {
+      props: {
+        error: 'Post no encontrado',
+        post: null
+      }
+    };
+  }
+
+  const [image, contentArr] = await Promise.all([
+    notionService.getPageMetadata(foundPost.id),
+    notionService.getPageContent(foundPost.id)
+  ]);
+  const content = contentArr.join(' ');
+  const wordCount = content.split(/\s+/).length;
+  return {
+    props: {
+      post: {
+        ...foundPost,
+        image,
+        content,
+        wordCount,
+        date: foundPost.created_time ? new Date(foundPost.created_time).toLocaleDateString() : ''
+      },
+      error: null
+    }
+  };
 }
