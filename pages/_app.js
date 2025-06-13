@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import { LanguageProvider } from '../context/LanguageContext';
 import { ThemeProvider } from 'next-themes';
 
-function Aplicacion({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <LanguageProvider>
@@ -15,4 +15,4 @@ function Aplicacion({ Component, pageProps }) {
   );
 }
 
-export default Aplicacion;
+export default App;

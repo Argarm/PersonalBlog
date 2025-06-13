@@ -1,3 +1,4 @@
+/* eslint-env node */
 import styles from '../../styles/components/postPage.module.css';
 import EnhancedImage from '../../components/EnhancedImage';
 import { notionService } from '../../services/notion';

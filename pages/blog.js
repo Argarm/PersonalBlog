@@ -1,3 +1,4 @@
+/* eslint-env node */
 import Link from 'next/link';
 import styles from '../styles/components/blog.module.css';
 import { notionService } from '../services/notion';
@@ -25,8 +26,8 @@ export default function Blog({ posts }) {
   );
 }
 
+// getStaticProps solo se ejecuta en el build (lado servidor)
 export async function getStaticProps() {
-  // Obtener el ID del bloque de Notion desde las variables de entorno
   const NOTION_BLOCK_ID = process.env.NOTION_BLOCK_ID;
   const response = await notionService.getPages(NOTION_BLOCK_ID);
   const posts = await Promise.all(
